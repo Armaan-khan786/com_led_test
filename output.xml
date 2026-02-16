@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.2 on win32)" generated="2026-02-16T17:10:19.227713" rpa="false" schemaversion="5">
+<suite id="s1" name="Uart Test" source="C:\Users\a7577\Desktop\sim_led_test\uart_test.robot">
+<kw name="Open Ports" owner="uart_lib" type="SETUP">
+<msg time="2026-02-16T17:10:22.351932" level="INFO">Opening COM6 (Sender) and COM7 (Receiver)...</msg>
+<status status="PASS" start="2026-02-16T17:10:19.280047" elapsed="3.072139"/>
+</kw>
+<test id="s1-t1" name="LED1 Test" line="8">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:23.484673" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-16T17:10:22.357261" elapsed="1.127656"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-16T17:10:23.488602" level="INFO">Sender -&gt; Sending Pin: 18
+✔ Sender Matched: Sending Pin: 18</msg>
+<arg>Sending Pin: 18</arg>
+<status status="PASS" start="2026-02-16T17:10:23.485873" elapsed="0.002830"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:23.491600" level="INFO">Receiver -&gt; Received Pin: 18
+✔ Receiver Matched: Received Pin: 18</msg>
+<arg>Received Pin: 18</arg>
+<status status="PASS" start="2026-02-16T17:10:23.489271" elapsed="0.002447"/>
+</kw>
+<status status="PASS" start="2026-02-16T17:10:22.355795" elapsed="1.136559"/>
+</test>
+<test id="s1-t2" name="LED2 Test" line="14">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:24.990977" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-16T17:10:23.494627" elapsed="1.496547"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-16T17:10:24.998746" level="INFO">Sender -&gt; Sending Pin: 19
+✔ Sender Matched: Sending Pin: 19</msg>
+<arg>Sending Pin: 19</arg>
+<status status="PASS" start="2026-02-16T17:10:24.992055" elapsed="0.006893"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:25.001878" level="INFO">Receiver -&gt; Received Pin: 19
+✔ Receiver Matched: Received Pin: 19</msg>
+<arg>Received Pin: 19</arg>
+<status status="PASS" start="2026-02-16T17:10:24.999782" elapsed="0.002245"/>
+</kw>
+<status status="PASS" start="2026-02-16T17:10:23.493900" elapsed="1.508960"/>
+</test>
+<test id="s1-t3" name="LED3 Test" line="20">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:26.501317" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-16T17:10:25.006669" elapsed="1.494867"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-16T17:10:26.508989" level="INFO">Sender -&gt; Sending Pin: 21
+✔ Sender Matched: Sending Pin: 21</msg>
+<arg>Sending Pin: 21</arg>
+<status status="PASS" start="2026-02-16T17:10:26.502389" elapsed="0.006782"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:26.511976" level="INFO">Receiver -&gt; Received Pin: 21
+✔ Receiver Matched: Received Pin: 21</msg>
+<arg>Received Pin: 21</arg>
+<status status="PASS" start="2026-02-16T17:10:26.509728" elapsed="0.002402"/>
+</kw>
+<status status="PASS" start="2026-02-16T17:10:25.005438" elapsed="1.507192"/>
+</test>
+<test id="s1-t4" name="LED4 Test" line="26">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:28.011183" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-16T17:10:26.515511" elapsed="1.495854"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-16T17:10:28.018734" level="INFO">Sender -&gt; Sending Pin: 22
+✔ Sender Matched: Sending Pin: 22</msg>
+<arg>Sending Pin: 22</arg>
+<status status="PASS" start="2026-02-16T17:10:28.012109" elapsed="0.006809"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-16T17:10:28.022099" level="INFO">Receiver -&gt; Received Pin: 22
+✔ Receiver Matched: Received Pin: 22</msg>
+<arg>Received Pin: 22</arg>
+<status status="PASS" start="2026-02-16T17:10:28.019763" elapsed="0.002641"/>
+</kw>
+<status status="PASS" start="2026-02-16T17:10:26.514505" elapsed="1.508686"/>
+</test>
+<kw name="Close Ports" owner="uart_lib" type="TEARDOWN">
+<msg time="2026-02-16T17:10:28.028461" level="INFO">Closing Ports...</msg>
+<status status="PASS" start="2026-02-16T17:10:28.025802" elapsed="0.002808"/>
+</kw>
+<status status="PASS" start="2026-02-16T17:10:19.229273" elapsed="8.799421"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Uart Test" id="s1" pass="4" fail="0" skip="0">Uart Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
