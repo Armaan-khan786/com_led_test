@@ -2,8 +2,7 @@ name: ESP32 UART Handshake CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -19,68 +18,61 @@ jobs:
 
     steps:
 
-      # 📥 Checkout Repo
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 🐍 Install Python + Robot
       - name: Install Python Dependencies
         run: |
           python --version
           pip install --upgrade pip
           pip install robotframework pyserial
 
-      # 🔧 Verify Arduino CLI
       - name: Verify Arduino CLI
         run: |
           .\arduino-cli.exe version
 
-      # 📦 Install ESP32 Core
       - name: Install ESP32 Core
         run: |
           .\arduino-cli.exe core update-index
           .\arduino-cli.exe core install esp32:esp32
 
-      # 🛠 Compile Sender
       - name: Compile Sender
         run: |
           .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\sender
 
-      # 🛠 Compile Receiver
       - name: Compile Receiver
         run: |
           .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\receiver
 
-      # ⬆ Upload Sender
       - name: Upload Sender (COM6)
         run: |
           .\arduino-cli.exe upload -p COM6 --fqbn esp32:esp32:esp32 .\sender
 
-      # ⬆ Upload Receiver
       - name: Upload Receiver (COM7)
         run: |
           .\arduino-cli.exe upload -p COM7 --fqbn esp32:esp32:esp32 .\receiver
 
-      # ⏳ Wait for reboot
       - name: Wait for Boards
         run: Start-Sleep -Seconds 5
 
-      # 🚀 Run Robot Tests
       - name: Run Robot Tests
         run: |
           robot --output output.xml --report report.html --log log.html uart_test.robot
 
-      # 📁 Create site folder
+      # ✅ FIX 1: ensure clean site folder
       - name: Prepare Site Folder
         run: |
+          if (Test-Path site) { Remove-Item site -Recurse -Force }
           mkdir site
-          move report.html site/
-          move log.html site/
-          move output.xml site/
+          copy report.html site/
+          copy log.html site/
+          copy output.xml site/
 
-      # 🌍 Deploy to GitHub Pages
+      # ✅ FIX 2: force publish branch (important)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true
