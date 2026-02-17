@@ -1,0 +1,67 @@
+name: ESP32 UART Handshake CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  uart-test:
+    runs-on: self-hosted
+
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Install Python Dependencies
+        run: |
+          python --version
+          pip install --upgrade pip
+          pip install robotframework pyserial
+
+      - name: 🔧 Verify Arduino CLI
+        run: |
+          .\arduino-cli.exe version
+
+      - name: 📦 Install ESP32 Core
+        run: |
+          .\arduino-cli.exe core update-index
+          .\arduino-cli.exe core install esp32:esp32
+
+      - name: 🛠 Compile Sender
+        run: |
+          .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\sender
+
+      - name: 🛠 Compile Receiver
+        run: |
+          .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\receiver
+
+      - name: ⬆ Upload Sender (COM6)
+        run: |
+          .\arduino-cli.exe upload -p COM6 --fqbn esp32:esp32:esp32 .\sender
+
+      - name: ⬆ Upload Receiver (COM7)
+        run: |
+          .\arduino-cli.exe upload -p COM7 --fqbn esp32:esp32:esp32 .\receiver
+
+      - name: ⏳ Wait for Boards to Reboot
+        run: Start-Sleep -Seconds 5
+
+      - name: 🚀 Run Robot Tests
+        run: |
+          robot --output output.xml --report report.html --log log.html uart_test.robot
+
+      - name: 📤 Upload Robot Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: UART-Test-Report
+          path: |
+            output.xml
+            report.html
+            log.html
