@@ -7,9 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   uart-test:
@@ -21,84 +19,68 @@ jobs:
 
     steps:
 
-      - name: 📥 Checkout Repository
+      # 📥 Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🐍 Install Python Dependencies
+      # 🐍 Install Python + Robot
+      - name: Install Python Dependencies
         run: |
           python --version
           pip install --upgrade pip
           pip install robotframework pyserial
 
-      - name: 🔧 Verify Arduino CLI
+      # 🔧 Verify Arduino CLI
+      - name: Verify Arduino CLI
         run: |
           .\arduino-cli.exe version
 
-      - name: 📦 Install ESP32 Core
+      # 📦 Install ESP32 Core
+      - name: Install ESP32 Core
         run: |
           .\arduino-cli.exe core update-index
           .\arduino-cli.exe core install esp32:esp32
 
-      - name: 🛠 Compile Sender
+      # 🛠 Compile Sender
+      - name: Compile Sender
         run: |
           .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\sender
 
-      - name: 🛠 Compile Receiver
+      # 🛠 Compile Receiver
+      - name: Compile Receiver
         run: |
           .\arduino-cli.exe compile --fqbn esp32:esp32:esp32 .\receiver
 
-      - name: ⬆ Upload Sender (COM6)
+      # ⬆ Upload Sender
+      - name: Upload Sender (COM6)
         run: |
           .\arduino-cli.exe upload -p COM6 --fqbn esp32:esp32:esp32 .\sender
 
-      - name: ⬆ Upload Receiver (COM7)
+      # ⬆ Upload Receiver
+      - name: Upload Receiver (COM7)
         run: |
           .\arduino-cli.exe upload -p COM7 --fqbn esp32:esp32:esp32 .\receiver
 
-      - name: ⏳ Wait for Boards to Reboot
+      # ⏳ Wait for reboot
+      - name: Wait for Boards
         run: Start-Sleep -Seconds 5
 
-      - name: 🚀 Run Robot Tests
+      # 🚀 Run Robot Tests
+      - name: Run Robot Tests
         run: |
           robot --output output.xml --report report.html --log log.html uart_test.robot
 
-      # Keep artifact upload (optional but good)
-      - name: 📤 Upload Robot Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: UART-Test-Report
-          path: |
-            output.xml
-            report.html
-            log.html
-
-      # 🔥 Prepare Pages Folder
-      - name: 📁 Prepare Pages Folder
+      # 📁 Create site folder
+      - name: Prepare Site Folder
         run: |
           mkdir site
           move report.html site/
           move log.html site/
           move output.xml site/
 
-      # 🔥 Upload to GitHub Pages
-      - name: 📤 Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      # 🌍 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: site
-
-  deploy:
-    needs: uart-test
-    runs-on: self-hosted
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      pages: write
-      id-token: write
-
-    steps:
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
