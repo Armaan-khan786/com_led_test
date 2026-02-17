@@ -6,6 +6,11 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   uart-test:
     runs-on: self-hosted
@@ -57,6 +62,7 @@ jobs:
         run: |
           robot --output output.xml --report report.html --log log.html uart_test.robot
 
+      # Keep artifact upload (optional but good)
       - name: 📤 Upload Robot Reports
         uses: actions/upload-artifact@v4
         with:
@@ -65,3 +71,34 @@ jobs:
             output.xml
             report.html
             log.html
+
+      # 🔥 Prepare Pages Folder
+      - name: 📁 Prepare Pages Folder
+        run: |
+          mkdir site
+          move report.html site/
+          move log.html site/
+          move output.xml site/
+
+      # 🔥 Upload to GitHub Pages
+      - name: 📤 Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: uart-test
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
