@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.2 on win32)" generated="2026-02-17T11:27:57.673578" rpa="false" schemaversion="5">
+<suite id="s1" name="Uart Test" source="C:\Users\a7577\Desktop\sim_led_test\actions-runner\_work\com_led_test\com_led_test\uart_test.robot">
+<kw name="Open Ports" owner="uart_lib" type="SETUP">
+<msg time="2026-02-17T11:28:00.734805" level="INFO">Opening COM6 (Sender) and COM7 (Receiver)...</msg>
+<status status="PASS" start="2026-02-17T11:27:57.726671" elapsed="3.008352"/>
+</kw>
+<test id="s1-t1" name="LED1 Test" line="8">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:08.237984" level="INFO">Receiver -&gt; Received Pin: 0
+Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-17T11:28:00.736266" elapsed="7.502027"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-17T11:28:08.256445" level="INFO">Sender -&gt; ets Jul 29 2019 12:21:46
+Sender -&gt; rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+Sender -&gt; configsip: 0, SPIWP:0xee
+Sender -&gt; clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+Sender -&gt; mode:DIO, clock div:1
+Sender -&gt; load:0x3fff0030,len:4876
+Sender -&gt; ho 0 tail 12 room 4
+Sender -&gt; load:0x40078000,len:16560
+Sender -&gt; load:0x40080400,len:3500
+Sender -&gt; entry 0x400805b4
+Sender -&gt; Sending Pin: 18
+✔ Sender Matched: Sending Pin: 18</msg>
+<arg>Sending Pin: 18</arg>
+<status status="PASS" start="2026-02-17T11:28:08.238813" elapsed="0.017914"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:08.258464" level="INFO">Receiver -&gt; Received Pin: 18
+✔ Receiver Matched: Received Pin: 18</msg>
+<arg>Received Pin: 18</arg>
+<status status="PASS" start="2026-02-17T11:28:08.257217" elapsed="0.001400"/>
+</kw>
+<status status="PASS" start="2026-02-17T11:28:00.735331" elapsed="7.523574"/>
+</test>
+<test id="s1-t2" name="LED2 Test" line="14">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:09.747889" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-17T11:28:08.260286" elapsed="1.487791"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-17T11:28:09.755176" level="INFO">Sender -&gt; Sending Pin: 19
+✔ Sender Matched: Sending Pin: 19</msg>
+<arg>Sending Pin: 19</arg>
+<status status="PASS" start="2026-02-17T11:28:09.748359" elapsed="0.007020"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:09.758745" level="INFO">Receiver -&gt; Received Pin: 19
+✔ Receiver Matched: Received Pin: 19</msg>
+<arg>Received Pin: 19</arg>
+<status status="PASS" start="2026-02-17T11:28:09.755707" elapsed="0.003203"/>
+</kw>
+<status status="PASS" start="2026-02-17T11:28:08.259470" elapsed="1.499731"/>
+</test>
+<test id="s1-t3" name="LED3 Test" line="20">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:11.257803" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-17T11:28:09.760455" elapsed="1.497532"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-17T11:28:11.265367" level="INFO">Sender -&gt; Sending Pin: 21
+✔ Sender Matched: Sending Pin: 21</msg>
+<arg>Sending Pin: 21</arg>
+<status status="PASS" start="2026-02-17T11:28:11.258274" elapsed="0.007277"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:11.268603" level="INFO">Receiver -&gt; Received Pin: 21
+✔ Receiver Matched: Received Pin: 21</msg>
+<arg>Received Pin: 21</arg>
+<status status="PASS" start="2026-02-17T11:28:11.265821" elapsed="0.002954"/>
+</kw>
+<status status="PASS" start="2026-02-17T11:28:09.759781" elapsed="1.509257"/>
+</test>
+<test id="s1-t4" name="LED4 Test" line="26">
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:12.767871" level="INFO">Receiver -&gt; Sent: READY
+✔ Receiver Matched: READY</msg>
+<arg>READY</arg>
+<status status="PASS" start="2026-02-17T11:28:11.270557" elapsed="1.497444"/>
+</kw>
+<kw name="Wait For Sender" owner="uart_lib">
+<msg time="2026-02-17T11:28:12.775384" level="INFO">Sender -&gt; Sending Pin: 22
+✔ Sender Matched: Sending Pin: 22</msg>
+<arg>Sending Pin: 22</arg>
+<status status="PASS" start="2026-02-17T11:28:12.768181" elapsed="0.007325"/>
+</kw>
+<kw name="Wait For Receiver" owner="uart_lib">
+<msg time="2026-02-17T11:28:12.778674" level="INFO">Receiver -&gt; Received Pin: 22
+✔ Receiver Matched: Received Pin: 22</msg>
+<arg>Received Pin: 22</arg>
+<status status="PASS" start="2026-02-17T11:28:12.775681" elapsed="0.003115"/>
+</kw>
+<status status="PASS" start="2026-02-17T11:28:11.269574" elapsed="1.509401"/>
+</test>
+<kw name="Close Ports" owner="uart_lib" type="TEARDOWN">
+<msg time="2026-02-17T11:28:12.781708" level="INFO">Closing Ports...</msg>
+<status status="PASS" start="2026-02-17T11:28:12.779697" elapsed="0.002114"/>
+</kw>
+<status status="PASS" start="2026-02-17T11:27:57.675112" elapsed="15.106753"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Uart Test" id="s1" pass="4" fail="0" skip="0">Uart Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
